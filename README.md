@@ -157,7 +157,8 @@ Before launching your application, you must configure the database schema within
      -- UUID from auth.users
      id uuid references auth.users not null primary key,
      full_name text,
-   );
+     email text
+   )
    ```
 
    This SQL statement creates a `users` table with columns for storing user data such as `id`, `full_name`. The `id` column is a foreign key referencing the `auth.users` table.

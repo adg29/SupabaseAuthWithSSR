@@ -46,12 +46,14 @@ export async function resetPassword(formData: FormData) {
   }
 
   const { newPassword } = result.data;
+  console.log('newPassword', newPassword);
 
   const { error } = await supabase.auth.updateUser({
     password: newPassword
   });
 
   if (error) {
+    console.log('error', error);
     redirect(
       '/redirect/auth-password-update?error=' +
         encodeURIComponent('An error occurred while updating the password')

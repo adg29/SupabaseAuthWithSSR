@@ -21,12 +21,14 @@ export async function resetPassword(formData: FormData) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
+  console.log('formData.getnewPassword', formData.get('newPassword'))
   const result = formDataSchemaResetPassword.safeParse({
     newPassword: formData.get('newPassword')
       ? String(formData.get('newPassword'))
       : ''
   });
 
+    console.log('result', result)
   if (!result.success) {
     const fieldErrors = result.error.formErrors.fieldErrors;
     let errorMessage = 'Invalid input';

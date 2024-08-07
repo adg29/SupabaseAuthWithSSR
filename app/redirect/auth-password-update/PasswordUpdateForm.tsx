@@ -7,7 +7,8 @@ import {
   Typography,
   Stack,
   TextField,
-  CircularProgress
+  CircularProgress,
+  FormControl
 } from '@mui/material';
 import { resetPassword } from './action';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
@@ -36,6 +37,11 @@ const PasswordUpdateForm: FC = () => {
 
   const handleSubmit = async (formData: FormData) => {
     // Check if the passwords match
+    console.log(
+      'formData',
+      JSON.stringify(formData),
+      JSON.stringify(formData.get('newPassword'))
+    );
     if (newPassword !== confirmPassword) {
       alert('Passwords must match.');
       return;
@@ -88,38 +94,44 @@ const PasswordUpdateForm: FC = () => {
               gap: { xs: 0.5, sm: 0.5, md: 1 }
             }}
           >
-            <TextField
-              id="newPassword"
-              label="New Password"
-              type="password"
-              value={newPassword}
-              onChange={(e) => {
-                setNewPassword(e.target.value);
-                validatePassword(e.target.value);
-              }}
-              autoComplete="new-password"
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              InputProps={{
-                startAdornment: <LockOutlinedIcon />
-              }}
-            />
+            <FormControl>
+              <TextField
+                id="newPassword"
+                name="newPassword"
+                label="New Password"
+                type="password"
+                value={newPassword}
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                  validatePassword(e.target.value);
+                }}
+                autoComplete="new-password"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                InputProps={{
+                  startAdornment: <LockOutlinedIcon />
+                }}
+              />
+            </FormControl>
 
-            <TextField
-              id="confirmPassword"
-              label="Confirm New Password"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              autoComplete="new-password"
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              InputProps={{
-                startAdornment: <LockOutlinedIcon />
-              }}
-            />
+            <FormControl>
+              <TextField
+                id="confirmPassword"
+                name="confirmPassword"
+                label="Confirm New Password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                autoComplete="new-password"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                InputProps={{
+                  startAdornment: <LockOutlinedIcon />
+                }}
+              />
+            </FormControl>
             <Message />
             <SubmitButton />
           </Box>
